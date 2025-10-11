@@ -26,8 +26,16 @@ function Square({tato, onTatoClick}) {
 export default function Board() {
     const [tatoIsNext, setTatoIsNext] = useState(true);
     const [squares, setTato] = useState(Array(9).fill(null));
+      const winner = calculateWinner(squares);
+      let status;
+      if (winner) {
+        status = "Winner: " + winner + " yayyyy!!!!!!";
+      } else {
+        status = "Next player: " + (tatoIsNext ? "tato" : "okra");
+      }
+
       function handleClick(i) {
-        if (squares[i]) {
+        if (squares[i] || calculateWinner(squares)) {
           return;
         }
         const nextTato = squares.slice();
@@ -41,6 +49,7 @@ export default function Board() {
   }
   return (
      <>
+      <div className="status">{status}</div>
       <div className="board-row">
         <Square tato={squares[0]} onTatoClick={() => handleClick(0)} />
         <Square tato={squares[1]} onTatoClick={() => handleClick(1)} />
