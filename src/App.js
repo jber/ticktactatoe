@@ -15,7 +15,7 @@ function Square({tato, onTatoClick}) {
 
   return (
   <button className="square" onClick={onTatoClick}>
-    {tato=="okra"? <img src="poisontato.webp" height="30px" width="30px"></img>: tato}
+    {tato=="okra"? <img src="poisontato.png" height="200px" width="200px"></img>: tato=="Tato"? <img src="tato.jpg" height="200px" width="200px"></img> : null}
     </button>
   );
 
@@ -40,7 +40,7 @@ export default function Board() {
         }
         const nextTato = squares.slice();
         if (tatoIsNext) {
-          nextTato[i] = "🥔";
+          nextTato[i] = "Tato";
         }   else {
         nextTato[i] = "okra";
       }
@@ -49,6 +49,8 @@ export default function Board() {
   }
   return (
      <>
+     <h1>Kwonky's Fanciful Chimbo Gardi</h1>
+     <h3>who suffers? who is saved?</h3>
       <div className="status">{status}</div>
       <div className="board-row">
         <Square tato={squares[0]} onTatoClick={() => handleClick(0)} />
