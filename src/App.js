@@ -1,37 +1,25 @@
 import {useState} from 'react';
 
 function Square({tato, onTatoClick}) {
-  //const [tato, chopTato] = useState(null);
-  //function handleClick() {
-  //   chopTato('🥔')
-  // }
-  // return (
-  // <button
-  //   className="square"
-  //     onClick={handleClick}
-  //     >
-  //     {tato}
-  //     </button>);
-
   return (
   <button className="square" onClick={onTatoClick}>
     {tato=="okra"? <img src="poisontato.png" height="200px" width="200px"></img>: tato=="tato"? <img src="tato.jpg" height="200px" width="200px"></img> : null}
     </button>
   );
-
 }
-
-
 
 export default function Board() {
     const [tatoIsNext, setTatoIsNext] = useState(true);
     const [squares, setTato] = useState(Array(9).fill(null));
       const winner = calculateWinner(squares);
       let status;
-      if (winner=="tato") {
-        status = "Winner: " + winner + " yayyyy!!!!!!";
-      } else if (winner=="okra") {
+
+      if (winner === "tato") {
+        status = "Winner: rubicon crossed...tatoes, the rightful emperor, has assumed the throne!!!";
+      } else if (winner === "okra") {
         status = "Winner: tatoes, because at the last second, tatoes rose up and slew the evil okra";
+      } else if (winner === null && isFull(squares)) {
+        status = "Winner: tatoes wins anyway, okra was exhausted...TKO";
       } else {
         status = "Next player: " + (tatoIsNext ? "tato" : "okra");
       }
@@ -46,13 +34,14 @@ export default function Board() {
         }   else {
         nextTato[i] = "okra";
       }
+
       setTato(nextTato);
       setTatoIsNext(!tatoIsNext);
   }
   return (
      <>
-     <h1>Kwonky's Fanciful Chimbo Gardi</h1>
-     <h3>who suffers? who is saved?</h3>
+      <h1>Kwonky's Fanciful Chimbo Gardi</h1>
+      <h3>who suffers? who is saved?</h3>
       <div className="status">{status}</div>
       <div className="board-row">
         <Square tato={squares[0]} onTatoClick={() => handleClick(0)} />
@@ -72,6 +61,7 @@ export default function Board() {
     </>
   );
 }
+
 function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
@@ -90,4 +80,8 @@ function calculateWinner(squares) {
     }
   }
   return null;
+}
+
+function isFull(squares) {
+  return squares.every(element => element !== null);
 }
