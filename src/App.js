@@ -3,19 +3,19 @@ import {useState} from 'react';
 function Square({tato, onTatoClick}) {
   //const [tato, chopTato] = useState(null);
   //function handleClick() {
-  //   chopTato('🥔') 
+  //   chopTato('🥔')
   // }
   // return (
-  // <button 
+  // <button
   //   className="square"
   //     onClick={handleClick}
   //     >
   //     {tato}
-  //     </button>); 
+  //     </button>);
 
   return (
   <button className="square" onClick={onTatoClick}>
-    {tato=="okra"? <img src="poisontato.png" height="200px" width="200px"></img>: tato=="Tato"? <img src="tato.jpg" height="200px" width="200px"></img> : null}
+    {tato=="okra"? <img src="poisontato.png" height="200px" width="200px"></img>: tato=="tato"? <img src="tato.jpg" height="200px" width="200px"></img> : null}
     </button>
   );
 
@@ -28,8 +28,10 @@ export default function Board() {
     const [squares, setTato] = useState(Array(9).fill(null));
       const winner = calculateWinner(squares);
       let status;
-      if (winner) {
+      if (winner=="tato") {
         status = "Winner: " + winner + " yayyyy!!!!!!";
+      } else if (winner=="okra") {
+        status = "Winner: tatoes, because at the last second, tatoes rose up and slew the evil okra";
       } else {
         status = "Next player: " + (tatoIsNext ? "tato" : "okra");
       }
@@ -40,7 +42,7 @@ export default function Board() {
         }
         const nextTato = squares.slice();
         if (tatoIsNext) {
-          nextTato[i] = "Tato";
+          nextTato[i] = "tato";
         }   else {
         nextTato[i] = "okra";
       }
@@ -69,7 +71,7 @@ export default function Board() {
       </div>
     </>
   );
-} 
+}
 function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
@@ -88,4 +90,4 @@ function calculateWinner(squares) {
     }
   }
   return null;
-} 
+}
