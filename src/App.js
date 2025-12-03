@@ -3,7 +3,7 @@ import {useState} from 'react';
 function Square({tato, onTatoClick}) {
   return (
   <button className="square" onClick={onTatoClick}>
-    {tato=="okra"? <img src="poisontato.png" height="200px" width="200px"></img>: tato=="tato"? <img src="tato.jpg" height="200px" width="200px"></img> : null}
+    {tato=="okra"? <img src="poisontato.png" height="180px" width="180px"></img>: tato=="tato"? <img src="tato.jpg" height="180px" width="180px"></img> : null}
     </button>
   );
 }
@@ -34,14 +34,22 @@ export default function Board() {
         }   else {
         nextTato[i] = "okra";
       }
-
+      
       setTato(nextTato);
       setTatoIsNext(!tatoIsNext);
-  }
+    }
+    
+    function restart()
+      {
+        setTato(Array(9).fill(null));
+        setTatoIsNext(true)
+      }
+
   return (
      <>
       <h1>Kwonky's Fanciful Chimbo Gardi</h1>
-      <h3>who suffers? who is saved?</h3>
+      <h3>who suffers? who is saved? </h3>
+      <h5><button className="restartbtn" onClick={restart}>Reset the Chimbo ?</button></h5>
       <div className="status">{status}</div>
       <div className="board-row">
         <Square tato={squares[0]} onTatoClick={() => handleClick(0)} />
